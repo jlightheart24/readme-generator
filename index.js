@@ -1,8 +1,9 @@
 const inquirer = require('inquirer');
-const { AsyncLocalStorage } = require('async_hooks');
-const { type } = require('os');
+const generatePage = require('./page-template');
+const fs = require('fs');
+var objectArr = [];
 
-const promptUser = testOutput => {
+const promptUser = () => {
     return inquirer.prompt([
         {
             type: 'input',
@@ -16,7 +17,7 @@ const promptUser = testOutput => {
         },
         {
             type: 'input',
-            name: 'desciption',
+            name: 'description',
             message: 'Give a description about your project.'
         },
         {
@@ -32,33 +33,75 @@ const promptUser = testOutput => {
         },
         {
             type: 'input',
-            name: 'github',
-            message: 'What is your github username'
+            name: 'link',
+            message: 'What is the link to your project?'
         },
+        {
+            type: 'input',
+            name: 'github',
+            message: 'What is the link to your github respository?'
+        }
+    ])
+    .then(userPrompt => {
+        objectArr.push(userPrompt)    
+    });
+};
+
+
+const promptImages = () => {
+
+    console.log(`
+    ===============
+    Add a New Image
+    ===============
+    `)
+
+    return inquirer.prompt([
         {
             type: 'confirm',
             name: 'confirmImage',
-            message: 'Would you like to use any images'
+            message: 'Would you like to use any images? If so add any images in the assets folder now. Confirm when finshed.'
+        },
+        {
+            type: 'input',
+            name: 'location',
+            message: 'What is the file location? eg(./assets/images/image.PNG)'
         },
         {
             type: 'input',
             name: 'image',
-            message: 'What will you name the images? (put the images in the assets folder under images)'
+            message: 'What will you name the image? (put the images in the assets folder under images)'
+        },
+        {
+            type: 'confirm',
+            name: 'confirmAddImage',
+            message: 'Would you like to add another image?',
+            default: false
         }
     ])
+    .then(imageData => {
+        if (imageData.confirmAddImage) {
+            return promptImages(imageData)
+        } else {
+            objectArr.push(imageData);
+            return fs.writeFileSync('./README.md', generatePage(objectArr), err => {
+                if (err) throw new Error(err);
+        
+                console.log('success!')
+            });
+        }
+    });
 };
 
 promptUser()
+    .then(promptImages)
+    // .then(writeToFile)
+;
 
-// const fs = require('fs');
-// const generatePage = require('./page-template.js');
+// function writeToFile(objectArr) {
+//     return fs.writeFileSync('./README.md', objectArr, err => {
+//         if (err) throw new Error(err);
 
-// const readmeDataArgs = process.argv.slice(2, process.argv.length);
-
-// const [name, age] = readmeDataArgs;
-
-// fs.writeFile('./readme.MD', generatePage(name, age), err => {
-//     if (err) throw err;
-
-//     console.log('Readme created! Checkout the readme.MD file to see the output!')
-// });
+//         console.log('success!')
+//     });
+// };
