@@ -1,25 +1,52 @@
 writeReadMe = (objectArr) => {
     console.log(objectArr);
     return `
-## ${objectArr[0].project}
+# <p style="text-align: center"> ${objectArr[0].project}
 
-## Developer
-* ${objectArr[0].name}
+# Table of Contents
+* [Description](#<description)
+* [Installation](#<installation)
+* [Usage](#<usage)
+* [License](#<license)
+* [Contributing](#<contributing)
+* [Tests](#<tests)
+* [Questions](#<questions)
 
-## Overview:
+# Description: 
+
 ${objectArr[0].description}
 
-## Built With:
-* ${objectArr[0].language}
+* ${objectArr[0].link}
 
-## Links:
-GitHub Repository: ${objectArr[0].github}
+# Installation:
 
-GitHub Published Site: ${objectArr[0].link}
-    
-## Image Name: 
-![Working Project Screenshot](./assets/images/empty-portfolio.PNG)
-${objectArr[1].location}
+${objectArr[0].installation}
+
+# Usage:
+
+${objectArr[0].usage}
+
+# License:
+
+${objectArr[0].license}
+
+
+# Contributing:
+
+${objectArr[0].name}
+
+# Tests: 
+
+${objectArr[0].test}
+
+# Questions: 
+Frequently Asked Questions
+* Q: ${objectArr[1].question}
+* A: ${objectArr[1].answer}
+
+Please email me or go to my github profile with any further question.
+* email: ${objectArr[0].email}
+* github: github.com/${objectArr[0].github}
 `;
 }
 
