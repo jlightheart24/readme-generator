@@ -19,7 +19,8 @@ To use this project you will need to have node and inquirer installed.
 
 To run the generator, run node.index in command line. Follow all of the prompts and input the information as instructed. The file will then automatically generate upon completion of the prompts. 
 
-Here is a link to a video that shows you how to use the generator.
+Here is a link to a video that shows you how to use the generator:
+https://www.youtube.com/watch?v=ebbWjPmCzCI
 
 # Contributing:
 Jonny Lightheart
