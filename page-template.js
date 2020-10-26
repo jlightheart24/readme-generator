@@ -1,5 +1,4 @@
 writeReadMe = (objectArr) => {
-    console.log(objectArr);
     return `
 # <p style="text-align: center"> ${objectArr[0].project}
 
